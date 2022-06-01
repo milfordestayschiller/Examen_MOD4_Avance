@@ -1,27 +1,23 @@
 let inputPrincipal = document.querySelector(".input")
 let botonAgregar = document.querySelector(".boton-agregar")
 let container = document.querySelector(".container")
-let lavarPlatos = document.querySelector("#lavarPlatos")
-let btnAgregar = document.querySelector(".boton-agregar")
+
 class Item {
-    constructor(lavarPlatos) {
-        //lavarPlatos = document.querySelector("#lavarPlatos").value
-       
-        this.crearDiv(lavarPlatos)
-        
+    constructor(nuevaTarea) {
+        this.crearDiv(nuevaTarea)
         };
-     crearDiv() {
+     crearDiv(nuevaTarea) {
     
      let newDiv = document.createElement("div")
      newDiv.classList.add("Item")
      let inputItem = document.createElement("input");
-     inputItem.value = inputPrincipal.value
+     nuevaTarea = inputPrincipal.value
+     inputItem.value = nuevaTarea
      inputItem.type = "text";
      inputItem.disabled = true 
      inputItem.classList.add("item-input")
      newDiv.appendChild(inputItem)
-     lavarPlatos = inputItem.value;
-    
+  
      let botonEditar = document.createElement("button")
      newDiv.appendChild(botonEditar);
      botonEditar.innerHTML =  "<i class='fas fa-lock'></i>"
@@ -31,7 +27,6 @@ class Item {
      
      botonRemover.innerHTML= "<i class='fas fa-trash'></i>"
      botonRemover.classList.add("boton-remover")
-     newDiv.appendChild(botonRemover);
      newDiv.appendChild(botonRemover,botonEditar,inputItem)
      container.appendChild(newDiv)
      botonEditar.addEventListener("click", function  (x) {
@@ -39,8 +34,7 @@ class Item {
        inputItem.disabled = !inputItem.disabled;
        inputItem.innerHTML = inputItem.disabled
        
-        
-        if(inputItem.disabled == false) {
+            if(inputItem.disabled == false) {
             botonEditar.innerHTML = "<i class='fas fa-lock-open'></i>"
         }
         else {
@@ -56,31 +50,24 @@ class Item {
 }
 
 botonAgregar.addEventListener("click", function (params) {
-   
-    chequearInput()
+     chequearInput()
     inputPrincipal.value = ""
 })
-
 
 let  chequearInput = () => {
    
     if(inputPrincipal.value !== "") {
-     new Item
-    
-        
+     let nuevaTarea;
+     new Item(nuevaTarea)
     };
     inputPrincipal.addEventListener("keypress", (event) => {
        if(event.key == 'Enter' && inputPrincipal.value !== "") {
            new Item();
            inputPrincipal.value = "";
-           
-          
-        }
-  
-       })
+            }
+  })
 }
-
-   chequearInput()
+ chequearInput()
   
   
 
